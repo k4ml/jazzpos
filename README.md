@@ -1,6 +1,16 @@
 # Intro
 Simple Point of Sale (POS) system based on Django. Not for production yet !
 
+# Quickstart
+On your terminal, run the following:-
+
+    git clone https://github.com/k4ml/jazzpos.git
+    cd jazzpos
+    python bootstrap.py
+    ./bin/buildout -v
+    ./bin/manage syncdb
+    ./bin/manage runserver
+
 # Todos
 Lot of things need to be polished up. This originally developed for very
 specific client so parts need to be generalized further. Things that I'd
