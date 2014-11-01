@@ -11,6 +11,7 @@ like to pursue:-
 * Upgrade to Django 1.7. This was developed while 1.4 still hot and then left
   dormant in my repository.
 * Proper l10n. Currently the main interface is in Malay.
+* Add tests !
 
 # Screenshot
 ## Dashboard
