@@ -1,0 +1,66 @@
+{% extends 'smartmin/form.html' %}
+
+{% block head-style %}
+{{ block.super }}
+{{ stock_formset.media }}
+{% endblock %}
+
+{% block save %}
+<h2>Harga</h2>
+{{ itemprice_formset.non_form_errors.as_ul }}
+{{ itemprice_formset.management_form }}
+<table class="form_table" cellspacing="0" border="1" id="formset" class="form">
+{% for form in itemprice_formset.forms %}
+  {% if forloop.first %}
+  <thead><tr>
+    {% for field in form.visible_fields %}
+    <th>{{ field.label|capfirst }}</th>
+    {% endfor %}
+  </tr></thead>
+  {% endif %}
+  <tr class="{% cycle row1,row2 %}">
+  {% for field in form.visible_fields %}
+    <td>
+    {# Include the hidden fields in the form #}
+    {% if forloop.first %}
+      {% for hidden in form.hidden_fields %}
+      {{ hidden }}
+      {% endfor %}
+    {% endif %}
+      {{ field.errors.as_ul }}
+      {{ field }}
+    </td>
+  {% endfor %}
+  </tr>
+{% endfor %}
+</table>
+<h2>Stok</h2>
+{{ stock_formset.non_form_errors.as_ul }}
+{{ stock_formset.management_form }}
+<table class="form_table" cellspacing="0" border="1" id="formset" class="form">
+{% for form in stock_formset.forms %}
+  {% if forloop.first %}
+  <thead><tr>
+    {% for field in form.visible_fields %}
+    <th>{{ field.label|capfirst }}</th>
+    {% endfor %}
+  </tr></thead>
+  {% endif %}
+  <tr class="{% cycle row1,row2 %}">
+  {% for field in form.visible_fields %}
+    <td>
+    {# Include the hidden fields in the form #}
+    {% if forloop.first %}
+      {% for hidden in form.hidden_fields %}
+      {{ hidden }}
+      {% endfor %}
+    {% endif %}
+      {{ field.errors.as_ul }}
+      {{ field }}
+    </td>
+  {% endfor %}
+  </tr>
+{% endfor %}
+</table>
+{{ block.super }}
+{% endblock %}

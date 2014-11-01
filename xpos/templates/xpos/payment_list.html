@@ -1,0 +1,43 @@
+{% extends "xpos/order_base.html" %}
+
+{% block content %}
+<h2>Bayaran untuk order #{{ order.id }} (#{{ customer.id }}-{{ customer.name }})</h1>
+<b>Jumlah order</b>: RM{{ order.total }}<br />
+<table class="datalist">
+    <tr>
+        <th>Jumlah</th>
+        <th>Tarikh</th>
+        <th>Kaedah Bayaran</th>
+        <th>No. Cek</th>
+        <th>Catatan</th>
+        <th></th>
+    </tr>
+    {% for payment in payments %}
+    <tr class="{% cycle 'even' 'odd' %}">
+        <td>{{ payment.amount }}</td>
+        <td>{{ payment.created|date:"d-m-Y" }}</td>
+        <td align="center">{{ payment.method }}</td>
+        <td>{{ payment.checque_no }}</td>
+        <td>{{ payment.notes }}</td>
+        <td>
+            <a href="{% url pos-orders-payments-print payment.id %}">Resit</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5" align="center">Tiada</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% if order.is_confirm %}
+<table class="datalist">
+<form action="." method="post">
+{{ payment_form.as_table }}
+</table>
+{% csrf_token %}
+<input type="submit" value="Submit" />
+</form>
+{% endif %}
+<a href="{% url pos-orders-show order.id %}">Kembali ke paparan order</a>
+{% endblock %}

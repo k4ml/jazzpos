@@ -1,0 +1,31 @@
+<table class="datalist" border="0" width="70%">
+    <tr class="tr-border">
+        <th align="left">Nama item</th>
+        <th>Kuantiti</th>
+        <th align="right">Harga/unit</th>
+        <th align="right">Jumlah (RM)</th>
+    </tr>
+    {% for item in order.orderitem_set.all %}
+    <tr class="{% cycle 'even' 'odd' %}">
+        <td align="left">{{ item.item.name }}</td>
+        <td align="center">{{ item.qty }}</td>
+        <td align="right">{{ item.price }}</td>
+        <td align="right">{{ item.total }}</td>
+        {% ifequal print_mode False %}
+        {% ifequal order.status 0 %}
+        <td align="left">
+            <a href="{% url pos-orders-delete-item item.id %}">Padam</a>
+        </td>
+        {% endifequal %}
+        {% endifequal %}
+    </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="3" align="right">Jumlah</td>
+        <td align="right">{{ order.total }}</td>
+    </tr>
+    <tr>
+        <td colspan="3" align="right">Bayaran - Terima Kasih</td>
+        <td align="right">{{ payment.amount }}</td>
+    </tr>
+</table>

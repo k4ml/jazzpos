@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Tukar Store</h1>
+<ul>
+{% for store in attached_stores %}
+    <li><a href="{% url jazzpos-store-switch store.id %}">{{ store.name }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

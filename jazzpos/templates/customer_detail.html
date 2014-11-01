@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Maklumat Pelanggan</h1>
+<table class="datalist" width="60%">
+    <tr>
+        <td width="30%"></td>
+        <td width="70%">
+            {% ifequal customer.store current_store %}
+            <a href="{% url jazzpos.views.edit_customer customer.id %}">Edit</a>
+            {% else %}
+            Edit
+            {% endifequal %}
+            | <a href="{% url jazzpos.views.list_orders customer.id %}">Senarai Order</a>
+        </td>
+    </tr>
+    <tr>
+        <th width="30%">Nama</th>
+        <td width="70%">{{ customer.name }}</td>
+    </tr>
+    <tr>
+        <th width="30%">Kategori</th>
+        <td width="70%">{{ customer.customer_type }}</td>
+    </tr>
+    <tr>
+        <th width="30%">Alamat</th>
+        <td width="70%">{{ customer.address }}</td>
+    </tr>
+</table>
+<span class="space"></span>
+
+<h2>Maklumat Pesakit</h2>
+<table class="datalist" width="60%">
+    <tr>
+        <td width="30%"></td>
+        <td width="70%">
+            {% ifequal customer.store current_store %}
+            <a href="{% url jazzpos.views.edit_patient customer.id %}">Edit</a>
+            {% else %}
+            Edit
+            {% endifequal %}
+            | <a href="{% url jazzpos.views.list_treatments customer.id %}">Senarai rawatan</a>
+        </td>
+    </tr>
+    <tr>
+        <th width="30%">No IC</th>
+        <td width="70%">{{ customer.patient.icno }}</td>
+    </tr>
+    <tr>
+        <th width="30%">Tarikh Lahir</th>
+        <td width="70%">{{ customer.patient.dob|date:"d-m-Y" }}</td>
+    </tr>
+    <tr>
+        <th width="30%">Log</th>
+        <td width="70%">{{ customer.patient.log }}</td>
+    </tr>
+    <tr>
+        <th width="30%">Level Luar</th>
+        <td width="70%">{{ customer.patient.outer_level|upper }}</td>
+    </tr>
+    <tr>
+        <th width="30%">Level Dalam</th>
+        <td width="70%">{{ customer.patient.inner_level|upper }}</td>
+    </tr>
+</table>
+
+{% endblock %}
+
+{% block main-nav %}
+{{ block.super }}
+<li><a href="{% url jazzpos.views.add_customer %}">Tambah pelanggan</a></li>
+{% endblock %}

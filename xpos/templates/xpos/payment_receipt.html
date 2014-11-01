@@ -1,0 +1,12 @@
+{% extends "xpos/pdf.html" %}
+
+{% block content %}
+<h2>Resit</h2>
+<div style="padding-left: 4px; ">
+Tarikh Transaksi: {{ order.created|date:"d-m-Y" }}<br />
+No. Transaksi: {{ order.id }}<br />
+{{ order.customer.name }} ({{ order.customer.id }})<br />
+{{ order.customer.address }}
+</div>
+{% include "xpos/includes/order_item_list_print.html" %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Tambah Pelanggan baru</h2>
+{% if form.errors %}
+<div class="alert alert-danger">
+    {{ form.errors }}
+</div>
+{% endif %}
+<form action="" method="post" id="jazzpos-views-add_customer" class="form-horizontal">
+    {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+    {% endfor %}
+    {% csrf_token %}
+    {% include "forms/render_fields.html" with form_fields=form.visible_fields submit_btn='Submit' %}
+</form>
+{% endblock %}

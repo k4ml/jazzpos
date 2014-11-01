@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Edit {{ patient.customer.name }}</h1>
+<form action="." method="post" class="form-horizontal" role="form">
+{% for hidden in form.hidden_fields %}
+    {{ hidden }}
+{% endfor %}
+{% csrf_token %}
+{% include "forms/render_fields.html" with form_fields=form.visible_fields submit_btn='Submit' %}
+<a href="{% url jazzpos.views.view_customer patient.customer.id %}">Kembali</a>
+</form>
+{% endblock %}
+
+{% block main-nav %}
+{{ block.super }}
+<li><a href="{% url jazzpos.views.view_customer patient.customer.id %}">Maklumat pelanggan</a></li>
+{% endblock %}

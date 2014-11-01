@@ -1,0 +1,3 @@
+{{ object.name }}
+{{ object.address }}
+{{ object.patient.icno }}

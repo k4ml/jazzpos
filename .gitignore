@@ -1,0 +1,19 @@
+syntax: glob
+*.pyc
+www/*
+*egg-info
+*.db
+*.swp
+*.dump
+server/apache2.conf
+server/access_log
+server/error_log
+server/apache2.pid
+.env
+eggs
+develop-eggs
+parts
+bin
+.installed.cfg
+cgi/index.cgi
+cgi/static

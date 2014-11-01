@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block head-js %}
+<script src="{{ STATIC_URL }}js/jquery-2.0.3.min.js"></script>
+<script src="{{ STATIC_URL }}js/angular.min.js"></script>
+<script src="{{ STATIC_URL }}js/angular-resource.min.js"></script>
+<script src="{{ STATIC_URL }}js/angular-route.min.js"></script>
+<script src="{{ STATIC_URL }}js/xposapp.js"></script>
+{% endblock %}
+
+{% block content %}
+<h2>Stok</h2>
+<div ng-app="xposApp">
+    <div ng-controller="StockEditController">
+        <div id="loadingWidget" class="row-fluid ui-corner-all" style="padding: 0 .7em;" loading-widget >
+            <div class="loadingContent">
+                <p>
+                    <img alt="Loading  Content" src="{{ STATIC_URL }}spinner_16.gif" />&nbsp;Loading
+                </p>
+            </div>
+        </div>
+        <div ng-hide="post_status.length < 0">
+            <ul>
+                <li ng-repeat="stat in post_status">{$ stat $}</li>
+            </ul>
+        </div>
+        <table class="datalist" width="100%" border="0">
+            <tr>
+                <th>
+                    <input type="checkbox" ng-click="checklist.selectAll(items, $event, updateItemTotal)" ng-checked="isSelectedAll()" />
+                </th>
+                <th>Nama Item</th>
+                <th>Stok Semasa</th>
+                <th>Kuantiti</th>
+                <th>Harga</th>
+                <th>Jumlah Semasa (RM)</th>
+                <th>Jumlah Baru (RM)</th>
+            </tr>
+            <tr ng-repeat="item in items">
+                <td>
+                    <input type="checkbox" name="selected" ng-checked="checklist.isSelected(items, item.id)" ng-click="checklist.updateSelection(items, $event, item.id, $index, updateItemTotal)"/>
+                </td>
+                <td>{$ item.name $}</td>
+                <td>{$ item.stock $}</td>
+                <td><input type="text" name="qty-{$ item.id $}" value="1" ng-model="item.qty" ng-change="updateItemTotal($index)" size="3" /></td>
+                <td align="right">{$ item.price $}</td>
+                <td align="right">{$ item.current_total $}</td>
+                <td align="right">{$ item.total $}</td>
+            </tr>
+            <tr>
+                <td colspan="5" align="right">Jumlah</td>
+                <td align="right">{$ data.current_total $}</td>
+                <td align="right">{$ total $}</td>
+            </tr>
+        </table>
+        <button ng-click="save()">Save</button>
+    </div>
+</div>
+{% endblock %}

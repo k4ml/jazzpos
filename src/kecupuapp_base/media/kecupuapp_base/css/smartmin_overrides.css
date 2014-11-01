@@ -1,0 +1,11 @@
+form input[type="text"] {
+    width: 176px;
+}
+
+form input[type="password"] {
+    width: 176px;
+}
+
+.label {
+    color: black;
+}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Store Settings</h1>
+<table class="datalist">
+    <tr>
+        <th>Nama</th>
+        <th></th>
+    </tr>
+    {% for settings in object_list %}
+    <tr>
+        <td>{{ settings.description }}</td>
+        <td><a href="{% url jazzpos-store-settings-edit settings.id %}">edit</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

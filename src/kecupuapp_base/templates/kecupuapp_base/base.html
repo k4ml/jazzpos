@@ -1,0 +1,96 @@
+{% load i18n %}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>{% block head-title %}kecupu.base{% endblock %}</title>
+
+{% block head-style %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/reset.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/smartmin_styles.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kecupuapp_base/css/smartmin_overrides.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kecupuapp_base/css/reset-fonts-grids.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kecupuapp_base/css/base.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kecupuapp_base/css/style.css">
+{% endblock %}
+
+{% block head-js %}
+<script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery-ui.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery_autocomplete.js"></script>
+{% endblock %}
+
+</head>
+<body>
+<div id="doc3" class="{{ BASE_SIDEBAR }}">
+    <div id="hd">
+        <!-- PUT MASTHEAD CODE HERE -->
+        <h1 class="site-title">{% block site-title %}{% if site_title %}{{ site_title }}{% else %}kecupuapp.base{% endif %}{% endblock %}</h1>
+        {% if user.is_authenticated %}
+        <div id="navbar">
+        {% block navbar %}
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="{% url kecupuapp_base:profile %}">Profile</a></li>
+                <li><a href="{% url kecupuapp_base:logout %}">Logout</a></li>
+                <li style="float: right;">Login as {{ user.username }} {% if user.is_superuser %}[<a href="{% url admin:index %}" style="color: red;">admin site</a>] {% endif %}</li>
+            </ul>
+        {% endblock %}
+        </div>
+        {% endif %}
+    </div>
+    <div id="bd">
+        <div id="yui-main">
+            <div class="yui-b">
+                <!-- PUT MAIN COLUMN CODE HERE -->
+                {% block page_title %}
+                <h2>{{ page_title }}</h2>
+                {% endblock %}
+                <div class="content">
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="yui-b right-bar">
+            <!-- PUT SECONDATY COLUMN CODE HERE -->
+            <div class="block">
+            {% block sidebar %}
+                {% block info-box %}
+                <h2>Info</h2>
+                Some content
+                {% endblock %}
+
+                {% block main-nav-title %}
+                <h2>Main</h2>
+                {% endblock %}
+                    <ul>
+                    {% block main-nav %}
+                        <li><a href="/">Home</a></li>
+                    {% endblock %}
+                    </ul>
+            {% endblock sidebar %}
+            </div>
+        </div>
+        {% endif %}{# user.is_authenticated #}
+        </div>
+    <div id="ft">
+    {% block footer %}
+        kecupuapp_base
+    {% endblock %}
+    </div>
+</div>
+</body>
+</html>

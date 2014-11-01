@@ -1,0 +1,49 @@
+<table class="datalist" border="{% if print_mode %}1{% else %}0{% endif %}" width="100%">
+    <tr>
+        <th>Nama item</th>
+        <th>Kuantiti</th>
+        <th>Harga/unit</th>
+        <th>Diskaun/unit</th>
+        <th>Jumlah</th>
+        <th>Jumlah Diskaun</th>
+    </tr>
+    {% for item in order.orderitem_set.all %}
+    <tr class="{% cycle 'even' 'odd' %}">
+        <td>{{ item.item.name }}</td>
+        <td>{{ item.qty }}</td>
+        <td align="right">{{ item.price }}</td>
+        <td align="right">{{ item.discount }}</td>
+        <td align="right">{{ item.total }}</td>
+        <td align="right">{{ item.total_discount }}</td>
+        {% ifequal print_mode False %}
+        {% ifequal order.status 0 %}
+        <td align="left">
+            <a href="{% url pos-orders-delete-item item.id %}">Padam</a>
+        </td>
+        {% endifequal %}
+        {% endifequal %}
+    </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="4" align="right">Jumlah</td>
+        <td align="right">{{ order.total }}</td>
+        <td align="right">{{ order.total_discount }}</td>
+    </tr>
+    <tr>
+        <td colspan="4" align="right">Jumlah sebenar (selepas diskaun)</td>
+        <td colspan="2" align="center">{{ order.total_after_discount }}</td>
+    </tr>
+    <tr>
+        <td colspan="4" align="right">
+        {% if order.is_complete %}
+        {% ifequal print_mode False %}<a href="{% url pos-orders-payments order.id %}">Senarai Bayaran</a> {% else %} Bayaran {% endifequal %}
+        {% else %}
+        Bayaran
+        {% endif %}
+        {% if order.is_confirm %}
+        [<a href="{% url pos-orders-payments order.id %}">Tambah</a>]
+        {% endif %}
+        </td>
+        <td colspan="2" align="center">{{ order.total_payment }}</td>
+    </tr>
+</table>

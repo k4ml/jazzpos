@@ -1,0 +1,80 @@
+{% extends "xpos/order_base.html" %}
+
+{% block head-js %}
+<script src="{{ STATIC_URL }}js/jquery-2.0.3.min.js"></script>
+<script src="{{ STATIC_URL }}js/angular.min.js"></script>
+<script src="{{ STATIC_URL }}js/angular-resource.min.js"></script>
+<script src="{{ STATIC_URL }}js/angular-route.min.js"></script>
+<script src="{{ STATIC_URL }}js/xposapp.js"></script>
+{% endblock %}
+
+{% block content %}
+<h2>Maklumat Order</h2>
+<div><b>Nama Pelanggan</b>: #{{ customer.id }} - {{ customer.name }}</div>
+<div><b>Order #ID</b>: {{ order.id }} [<a href="{% url pos-orders-invoice order.id %}">Invoice</a>] </div>
+<div><b>Status</b>: {{ order.get_status_display }}</div>
+<div><b>Kategori</b>: {{ order.get_order_type_display }}</div>
+<div><br /></div>
+
+<div ng-app="xposApp">
+    <div ng-controller="OrderEditController">
+        <div id="loadingWidget" class="row-fluid ui-corner-all" style="padding: 0 .7em;" loading-widget >
+            <div class="loadingContent">
+                <p>
+                    <img alt="Loading  Content" src="{{ STATIC_URL }}spinner_16.gif" />&nbsp;Loading
+                </p>
+            </div>
+        </div>
+        <div ng-hide="post_status.length < 0">
+            <ul>
+                <li ng-repeat="stat in post_status">{$ stat $}</li>
+            </ul>
+        </div>
+        <table class="table datalist" width="100%" border="0">
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" ng-click="checklist.selectAll(order.items, $event, updateItemTotal)" ng-checked="isSelectedAll()" />
+                </th>
+                <th>Title</th>
+                <th>Kuantiti</th>
+                <th>Harga</th>
+                <th>Jumlah</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="e in order.items" ng-class="getSelectedClass(e)">
+                <td>
+                    <input type="checkbox" name="selected" ng-checked="checklist.isSelected(order.items, e.id)" ng-click="checklist.updateSelection(order.items, $event, e.id, $index, updateItemTotal)"/>
+                </td>
+                <td>{$ e.name $}</td>
+                <td><input type="text" name="qty-{$ e.id $}" value="1" ng-model="e.qty" ng-change="updateItemTotal($index)" size="3" /></td>
+                <td>{$ e.price $}</td>
+                <td>{$ e.total $}</td>
+            </tr>
+            <tr>
+                <td colspan="4" align="right">Total</td>
+                <td align="right">{$ order.total $}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button ng-click="save()">Save</button>
+    {% if order.is_new %}
+    <form action="{% url pos-orders-show order.id %}" method="post" id="pos-orders-confirm" class="inline">
+    {% csrf_token %}
+    {% for field in confirm_form.hidden_fields %}
+        {{ field }}
+    {% endfor %}
+    <input type="submit" value="Sahkan" name="submit" />
+    </form>
+    <button ng-click="go('/pos/orders/{{ order.pk }}')">Lihat</button>
+    {% endif %}
+    <br />
+    <span>Selected: {$ selected $}</span>
+    <br />
+    <textarea>
+        {$ order|json $}
+    </textarea>
+    </div>
+</div> 
+{% endblock %}

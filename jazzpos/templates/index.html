@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a href="{% url jazzpos.views.list_customers %}">Senarai Pelanggan</a> |
+        <a href="{% url xpos.item_list %}">Item</a> |
+        <a href="{% url pos-stock %}">Stok</a>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a href="{% url pos-reports %}">Laporan</a></li>
+    </div>
+</div>
+{% endblock %}

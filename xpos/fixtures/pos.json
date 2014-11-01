@@ -1,0 +1,272 @@
+[
+    {
+        "pk": 1, 
+        "model": "pos.item", 
+        "fields": {
+            "sku": "GHSI-KURSUS", 
+            "price": "125.00", 
+            "name": "Kursus Gaya Hidup Sihat - GHSI"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "pos.item", 
+        "fields": {
+            "sku": "GHSI-AHLI", 
+            "price": "25.00", 
+            "name": "Keahlian Sistem GHSI"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "pos.order", 
+        "fields": {
+            "customer": 2, 
+            "total": "0.00", 
+            "modified": "2011-01-30", 
+            "created": "2011-01-30"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "pos.order", 
+        "fields": {
+            "customer": 3, 
+            "total": "0.00", 
+            "modified": "2011-02-11", 
+            "created": "2011-02-11"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "pos.order", 
+        "fields": {
+            "customer": 4, 
+            "total": "150.00", 
+            "modified": "2011-02-13", 
+            "created": "2011-02-13"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "pos.order", 
+        "fields": {
+            "customer": 5, 
+            "total": "150.00", 
+            "modified": "2011-02-19", 
+            "created": "2011-02-19"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "pos.order", 
+        "fields": {
+            "customer": 6, 
+            "total": "150.00", 
+            "modified": "2011-02-19", 
+            "created": "2011-02-19"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "pos.order", 
+        "fields": {
+            "customer": 7, 
+            "total": "150.00", 
+            "modified": "2011-02-19", 
+            "created": "2011-02-19"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "pos.orderitem", 
+        "fields": {
+            "sku": "GHSI-KURSUS", 
+            "price": "125.00", 
+            "qty": 1, 
+            "item": 1, 
+            "total": "125.00", 
+            "order": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "pos.orderitem", 
+        "fields": {
+            "sku": "GHSI-AHLI", 
+            "price": "25.00", 
+            "qty": 1, 
+            "item": 2, 
+            "total": "25.00", 
+            "order": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "pos.orderitem", 
+        "fields": {
+            "sku": "GHSI-KURSUS", 
+            "price": "125.00", 
+            "qty": 1, 
+            "item": 1, 
+            "total": "125.00", 
+            "order": 2
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "pos.orderitem", 
+        "fields": {
+            "sku": "GHSI-AHLI", 
+            "price": "25.00", 
+            "qty": 1, 
+            "item": 2, 
+            "total": "25.00", 
+            "order": 2
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "pos.orderitem", 
+        "fields": {
+            "sku": "GHSI-KURSUS", 
+            "price": "125.00", 
+            "qty": 1, 
+            "item": 1, 
+            "total": "125.00", 
+            "order": 3
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "pos.orderitem", 
+        "fields": {
+            "sku": "GHSI-AHLI", 
+            "price": "25.00", 
+            "qty": 1, 
+            "item": 2, 
+            "total": "25.00", 
+            "order": 3
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "pos.orderitem", 
+        "fields": {
+            "sku": "GHSI-KURSUS", 
+            "price": "125.00", 
+            "qty": 1, 
+            "item": 1, 
+            "total": "125.00", 
+            "order": 4
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "pos.orderitem", 
+        "fields": {
+            "sku": "GHSI-AHLI", 
+            "price": "25.00", 
+            "qty": 1, 
+            "item": 2, 
+            "total": "25.00", 
+            "order": 4
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "pos.orderitem", 
+        "fields": {
+            "sku": "GHSI-KURSUS", 
+            "price": "125.00", 
+            "qty": 1, 
+            "item": 1, 
+            "total": "125.00", 
+            "order": 5
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "pos.orderitem", 
+        "fields": {
+            "sku": "GHSI-AHLI", 
+            "price": "25.00", 
+            "qty": 1, 
+            "item": 2, 
+            "total": "25.00", 
+            "order": 5
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "pos.orderitem", 
+        "fields": {
+            "sku": "GHSI-KURSUS", 
+            "price": "125.00", 
+            "qty": 1, 
+            "item": 1, 
+            "total": "125.00", 
+            "order": 6
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "pos.orderitem", 
+        "fields": {
+            "sku": "GHSI-AHLI", 
+            "price": "25.00", 
+            "qty": 1, 
+            "item": 2, 
+            "total": "25.00", 
+            "order": 6
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "pos.payment", 
+        "fields": {
+            "created": "2011-01-30", 
+            "checque_no": "", 
+            "modified": "2011-01-30", 
+            "order": 1, 
+            "amount": "126.00", 
+            "method": "cash"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "pos.payment", 
+        "fields": {
+            "created": "2011-02-12", 
+            "checque_no": "", 
+            "modified": "2011-02-12", 
+            "order": 2, 
+            "amount": "126.00", 
+            "method": "cash"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "pos.payment", 
+        "fields": {
+            "created": "2011-02-13", 
+            "checque_no": "", 
+            "modified": "2011-02-13", 
+            "order": 3, 
+            "amount": "126.00", 
+            "method": "cash"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "pos.payment", 
+        "fields": {
+            "created": "2011-02-19", 
+            "checque_no": "", 
+            "modified": "2011-02-19", 
+            "order": 1, 
+            "amount": "25.00", 
+            "method": "cash"
+        }
+    }
+]

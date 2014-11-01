@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>{% block head_title %} Print {% endblock %}</title>
+<style type="text/css">
+td, th {
+    padding-top: 0.1em;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+    text-align: center;
+}
+h1 {
+    font-size: 200%;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+receipt-address {
+    font-size: 50%;
+    padding-top: 0;
+    margin-top: 0;
+}
+table tr.tr-border th {
+    border-bottom: 1px solid;
+}
+</style>
+</head>
+<body>
+{% block header %}
+{% autoescape off %}
+    {{ storesettings_receipt_header|linebreaksbr }}
+{% endautoescape %}
+{% endblock %}
+{% block content %}
+
+{% endblock %}
+{% block note %}
+<p>Nota: {{ storesettings_receipt_note }}</p>
+{% endblock %}
+</body>
+</html>

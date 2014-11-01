@@ -1,0 +1,1 @@
+jQuery.curCSS = jQuery.css

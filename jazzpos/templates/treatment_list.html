@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load pagination_tags %}
+
+{% block content %}
+<h1>Senarai rawatan - {{ patient.customer.name }}</h1>
+<table width="100%" class="datalist">
+    <tr>
+        <th>Tarikh</th>
+        <th width="20%">Simptom</th>
+        <th width"20%">Diagnosis</th>
+        <th width"30%">Rawatan</th>
+        <th></th>
+    </tr>
+    {% autopaginate treatments 10 %}
+    {% for treatment in treatments %}
+    <tr>
+        <td>{{ treatment.created|date:"d-m-Y" }}</td>
+        <td width="20%">{{ treatment.symptom }}</td>
+        <td width="20%">{{ treatment.diagnosis }}</td>
+        <td width="30%">{{ treatment.remedy }}</td>
+        <td>
+            {% ifequal treatment.store current_store %}
+            <a href="{% url jazzpos.views.edit_treatment treatment.id %}">edit</a>
+            {% endifequal %}
+        </td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="4" align="center">{% paginate %}</td>
+    </tr>
+</table>
+{% endblock %}
+
+{% block main-nav %}
+{{ block.super }}
+<li><a href="{% url jazzpos.views.add_treatment patient.pk %}">Tambah Rawatan</a></li>
+<li><a href="{% url jazzpos.views.view_customer patient.pk %}">Maklumat Pesakit</a></li>
+{% endblock %}

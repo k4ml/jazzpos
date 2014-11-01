@@ -1,0 +1,63 @@
+{% extends "xpos/order_base.html" %}
+
+{% block content %}
+<div>
+    <div>
+        <h1>Maklumat Order</h1>
+        <div><b>Nama Pelanggan</b>: #{{ customer.id }} - {{ customer.name }}</div>
+        <div><b>Order #ID</b>: {{ order.id }} [<a href="{% url pos-orders-invoice order.id %}">Invoice</a>] </div>
+        <div><b>Status</b>: {{ order.get_status_display }}</div>
+        <div><b>Kategori</b>: {{ order.get_order_type_display }}</div>
+        <b>Senarai item</b>
+        {% include "xpos/includes/order_item_list.html" %}
+        {% if order.is_new %}
+        <form action="" method="post" id="pos-orders-confirm" class="inline">
+        {% csrf_token %}
+        {% for field in confirm_form.hidden_fields %}
+            {{ field }}
+        {% endfor %}
+        <input type="submit" value="Sahkan" name="submit" />
+        </form>
+        <button onclick="window.location='/pos/orders-edit/{{ order.pk }}';">Edit</button>
+        {% endif %}
+
+        {% if order.is_confirm %}
+        {% ifequal order.total_payment 0 %}
+        <form action="" method="post" id="pos-orders-cancel">
+        {% csrf_token %}
+        {% for field in cancel_form.hidden_fields %}
+            {{ field }}
+        {% endfor %}
+        <input type="submit" value="Batalkan" name="submit" />
+        </form>
+        {% endifequal %}
+        {% endif %}
+        <div><br /></div>
+
+        {% if order.is_new %}
+        <h2>Tambah Item</h2>
+        {{ order_item_form.non_field_errors }}
+        <form action="" method="post" id='pos-orders-item-new'>
+        {% csrf_token %}
+        {% for field in order_item_form.hidden_fields %}
+            {{ field }}
+        {% endfor %}
+        <table>
+            <tr>
+            {% for field in order_item_form.visible_fields %}
+                <td style="vertical-align: bottom">
+                    {{ field.errors }}<br />
+                    {{ field.label_tag }}: {{ field }}
+                </td>
+            {% endfor %}
+                <td style="vertical-align: bottom;">
+                    <input type="submit" name="submit" value="Tambah" />
+                </td>
+            </tr>
+        </table>
+        </form>
+        {% endif %}
+        <div><br /></div>
+    </div>
+</div>
+{% endblock %}

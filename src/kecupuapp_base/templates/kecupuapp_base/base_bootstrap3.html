@@ -1,0 +1,99 @@
+{% load i18n %}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>{% block head-title %}kecupu.base{% endblock %}</title>
+
+{% block head-style %}
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/smartmin_styles.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kecupuapp_base/css/smartmin_overrides.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kecupuapp_base/css/style.css">
+{% endblock %}
+
+{% block head-js %}
+<!-- the minimun version that work with bootstrap3 and django_autocomplete -->
+<script src="//code.jquery.com/jquery-1.7.2.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery-ui.js"></script>
+<script src="{{ STATIC_URL }}js/jquery_autocomplete.js"></script>
+{% endblock %}
+
+</head>
+<body>
+<div id="doc3" class="container">
+    <div class="row">
+        <!-- PUT MASTHEAD CODE HERE -->
+        <h1>{% block site-title %}{% if site_title %}{{ site_title }}{% else %}kecupuapp.base{% endif %}{% endblock %}</h1>
+        {% if user.is_authenticated %}
+        <nav class="navbar navbar-default" role="navigation">
+        <div class="collapse navbar-collapse">
+        {% block navbar %}
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="{% url kecupuapp_base:profile %}">Profile</a></li>
+                <li><a href="{% url kecupuapp_base:logout %}">Logout</a></li>
+                <li style="float: right;">Login as {{ user.username }} {% if user.is_superuser %}[<a href="{% url admin:index %}" style="color: red;">admin site</a>] {% endif %}</li>
+            </ul>
+        {% endblock %}
+        </div>
+        </nav>
+        {% endif %}
+    </div>
+    <div class="row">
+        {% if user.is_authenticated %}
+        <div class="col-md-3">
+            <!-- PUT SECONDATY COLUMN CODE HERE -->
+            <div class="block">
+            {% block sidebar %}
+                {% block info-box %}
+                <h2>Info</h2>
+                Some content
+                {% endblock %}
+
+                {% block main-nav-title %}
+                <h2>Main</h2>
+                {% endblock %}
+                    <ul>
+                    {% block main-nav %}
+                        <li><a href="/">Home</a></li>
+                    {% endblock %}
+                    </ul>
+            {% endblock sidebar %}
+            </div>
+        </div>
+        {% endif %}{# user.is_authenticated #}
+        <div class="col-md-9">
+            <div class="yui-b">
+                <!-- PUT MAIN COLUMN CODE HERE -->
+                {% block page_title %}
+                <h2>{{ page_title }}</h2>
+                {% endblock %}
+                <div class="content">
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    {% block footer %}
+        kecupuapp_base
+    {% endblock %}
+    </div>
+</div>
+</body>
+</html>

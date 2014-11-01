@@ -1,0 +1,49 @@
+{% extends "xpos/order_base.html" %}
+
+{% block content %}
+<h2>Penyata Akaun - #{{ customer.id }} {{ customer.name }}</h2>
+<form action="." method="get">
+    {{ search_form }}
+    <input type="submit" value="Papar" />
+</form>
+<form action="{{ request.path }}" method="get">
+    <input type="submit" value="Reset" />
+</form>
+<table class="datalist" width="100%">
+    <tr>
+        <th width="10%">Tarikh</th>
+        <th width="50%">Transaksi</th>
+        <th width="10%">Debit</th>
+        <th width="10%">Kredit</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Baki lepas</td>
+        <td colspan="2" align="center">{{ previous_balance }}</td>
+    </tr>
+    {% for transaction in transactions %}
+    <tr>
+        <td width="10%">{{ transaction.date|date:"d-m-Y" }}</td>
+        <td width="50%">{{ transaction.description }}</td>
+        <td width="10%" align="right">{% ifequal transaction.type "debit" %}{{ transaction.amount }}{% endifequal %}</td>
+        <td width="10%" align="right">{% ifequal transaction.type "credit" %}{{ transaction.amount }}{% endifequal %}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="2" align="right">Jumlah sekarang</td>
+        <td align="right">{{ total_debit }}</td>
+        <td align="right">{{ total_credit }}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td align="right">Jumlah semasa (Jumlah sekarang + Baki lepas)</td>
+        <td colspan="2" align="center">{{ current_order_total }}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td align="right">Baki semasa (Kredit - Jumlah semasa)</td>
+        <td colspan="2" align="center">{{ current_balance }}</td>
+    </tr>
+</table>
+<span>* Nilai negatif adalah tunggakan</span>
+{% endblock %}

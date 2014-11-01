@@ -1,0 +1,5 @@
+syntax: glob
+*.pyc
+*.swp
+translations/ms/LC_MESSAGES/django.mo
+translations/ms/LC_MESSAGES/djangojs.mo

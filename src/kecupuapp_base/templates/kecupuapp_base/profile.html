@@ -1,0 +1,7 @@
+{% extends "kecupuapp_base/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Profile</h2>
+<a href="{% url kecupuapp_base:password-change %}">{% trans "Change password" %}</a>
+{% endblock %}

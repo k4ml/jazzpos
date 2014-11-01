@@ -1,0 +1,67 @@
+{% extends "xpos/order_base.html" %}
+{% load pagination_tags %}
+
+{% block content %}
+<h2>Senarai order - {{ customer.name }}</h2>
+<table class="datalist" width="100%">
+    <tr>
+        <th>Order ID</th>
+        <th>Kategori</th>
+        <th>Tarikh Transaksi</th>
+        <th>Jumlah</th>
+        <th>Bayaran</th>
+        <th>Status</th>
+        <th></th>
+    </tr>
+    {% autopaginate order_list 10 %}
+    {% for order in order_list %}
+    <tr class="{% cycle 'even' 'odd' %}">
+        <td align="center">{{ order.id }}</td>
+        <td align="center">{{ order.get_order_type_display }}</td>
+        <td align="center">{{ order.transaction_date|date:"d-m-Y" }}</td>
+        <td align="right">{{ order.total|floatformat:2 }}</td>
+        <td align="right">{{ order.total_payment|floatformat:2 }}</td>
+        <td align="center">{{ order.get_status_display }}</td>
+        <td>
+            <a href="{% url pos-orders-show order.id %}">Lihat</a>
+            {% ifequal order.status pos_models.ORDER_STATUS_NEW %}
+            | <a href="{% url pos-orders-edit order.id %}">Edit</a>
+            {% endifequal %}
+            {% ifequal order.status pos_models.ORDER_STATUS_NEW %}
+            | <a href="{% url pos-orders-delete order.id %}">Padam</a>
+            {% endifequal %}
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5" align="center">Tiada</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="7" align="center">{% paginate %}</td>
+    </tr>
+</table>
+
+<h2>Tambah Order</h2>
+<form action="" method="post" id="pos-orders-new">
+{% csrf_token %}
+{{ form.non_field_errors }}
+{% for field in form.hidden_fields %}
+{{ field }}
+{% endfor %}
+<table>
+    <tr>
+    {% for field in form.visible_fields %}
+        <td style="vertical-align: bottom;">
+            {{ field.errors }}<br />
+            {{ field.label_tag }}: {{ field }}
+        </td>
+    {% endfor %}
+        <td style="vertical-align: bottom;">
+            <br />
+            <input type="submit" name="submit" value="Tambah" />
+        </td>
+    </tr>
+</table>
+</form>
+{% endblock %}

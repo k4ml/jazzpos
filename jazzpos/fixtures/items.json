@@ -1,0 +1,65 @@
+[
+    {
+        "pk": 1, 
+        "model": "xpos.item", 
+        "fields": {
+            "discount": "0.00", 
+            "price": "50.00", 
+            "name": "Jus Harmoni"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "xpos.item", 
+        "fields": {
+            "discount": "0.00", 
+            "price": "33.00", 
+            "name": "Garam Infrasonik"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "jazzpos.itemprice", 
+        "fields": {
+            "item": 1, 
+            "price": "33.00", 
+            "customertype": "practioner"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "jazzpos.itemprice", 
+        "fields": {
+            "item": 1, 
+            "price": "20.00", 
+            "customertype": "jazzpos"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "jazzpos.itemprice", 
+        "fields": {
+            "item": 1, 
+            "price": "35.00", 
+            "customertype": "member"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "jazzpos.itemprice", 
+        "fields": {
+            "item": 1, 
+            "price": "45.00", 
+            "customertype": "patient"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "jazzpos.itemprice", 
+        "fields": {
+            "item": 2, 
+            "price": "33.00", 
+            "customertype": "patient"
+        }
+    }
+]

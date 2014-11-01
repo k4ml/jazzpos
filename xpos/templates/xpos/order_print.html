@@ -1,0 +1,46 @@
+{% extends "pos/pdf.html" %}
+
+{% block content %}
+<h1>Resit Transaksi</h1>
+<div><b>No. Transaksi</b>: #{{ order.id }}</div>
+<b>Senarai item</b>
+<table border="1" width="80%" id="mytable">
+    <tr>
+        <th width="50%">Nama item</th>
+        <th width="10%">Kuantiti</th>
+        <th width="20%">Harga/unit</th>
+        <th width="20%">Jumlah</th>
+    </tr>
+    {% for item in order.orderitem_set.all %}
+    <tr>
+        <td width="50%" align="left">{{ item.item.name }}</td>
+        <td width="10%">{{ item.qty }}</td>
+        <td width="20%" align="right">{{ item.price }}</td>
+        <td width="20%" align="right">{{ item.total }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="3" align="right">Jumlah</td>
+        <td align="right">{{ order.total }}</td>
+    </tr>
+    <tr>
+        <td colspan="3" align="right">Bayaran</td>
+        <td align="right">{{ order.total_payment }}</td>
+    </tr>
+</table>
+<h2>Bayaran</h2>
+<table border="1" width="50%">
+    <tr>
+        <th>Jumlah</th>
+        <th>Tarikh</th>
+        <th>Catatan</th>
+    </tr>
+    {% for payment in payments %}
+    <tr>
+        <td>{{ payment.amount }}</td>
+        <td>{{ payment.created|date:"d-m-Y" }}</td>
+        <td>{{ payment.notes }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

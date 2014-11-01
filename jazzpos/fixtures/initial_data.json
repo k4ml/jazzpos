@@ -1,0 +1,45 @@
+[
+    {
+        "pk": 1, 
+        "model": "xpos.item", 
+        "fields": {
+            "discount": "0", 
+            "price_sale": "15", 
+            "price_cost": "10", 
+            "name": "Reevo"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "xpos.item", 
+        "fields": {
+            "discount": "0", 
+            "price_sale": "20", 
+            "price_cost": "15", 
+            "name": "Tamar Cocoa"
+        }
+    },
+    {
+        "pk": 1, 
+        "model": "jazzpos.store", 
+        "fields": {
+            "name": "Jazz Store" 
+        }
+    },
+    {
+        "pk": "patient", 
+        "model": "jazzpos.customertype", 
+        "fields": {
+            "status": 1, 
+            "description": "Biasa"
+        }
+    }, 
+    {
+        "pk": "member", 
+        "model": "jazzpos.customertype", 
+        "fields": {
+            "status": 1, 
+            "description": "Ahli"
+        }
+    } 
+]

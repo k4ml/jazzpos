@@ -1,0 +1,19 @@
+
+{% load widget_tweaks %}
+
+{% for form_field in form_fields %}
+<div class="form-group">
+    <label class="col-sm-1 control-label" for="{{ form_field.auto_id }}">{{ form_field.label }}</label>
+    <div class="col-sm-8">
+    {% render_field form_field class+="form-control" %}
+    </div>
+</div>
+{% endfor %}
+
+{% if submit_btn %}
+<div class="form-group">
+    <div class="col-sm-offset-1 col-sm-10">
+        <input type="submit" value="{{ submit_btn }}" name="{{ submit_name|default:'submit' }}" class="btn btn-default" />
+    </div>
+</div>
+{% endif %}

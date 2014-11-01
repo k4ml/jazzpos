@@ -1,0 +1,8 @@
+
+<form action="{{ form_action|default:'.' }}" method="{{ form_method|default:'post' }}" class="form-horizontal" role="form">
+{% for hidden in form_obj.hidden_fields %}
+    {{ hidden }}
+{% endfor %}
+{% csrf_token %}
+{% include 'forms/render_fields.html' with form_fields=form_obj.visible_fields submit_btn=form_submit_btn %}
+</form>

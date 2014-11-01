@@ -1,0 +1,30 @@
+# Kecupuapp_base ms translation.
+# Copyright (C) 2011
+# This file is distributed under the same license as the PACKAGE package.
+# Mohd. Kamal Bin Mustafa <kamal@smach.net>, 2011.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-04-03 14:11-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+#: templates/kecupuapp_base/password_change_done.html:7
+msgid "Password changed"
+msgstr "Kata laluan ditukar"
+
+#: templates/kecupuapp_base/password_change_done.html:9
+msgid "Back to profile page"
+msgstr "Kembali ke laman profil"
+
+#: templates/kecupuapp_base/profile.html:6
+msgid "Change password"
+msgstr "Tukar kata laluan"

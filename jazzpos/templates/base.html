@@ -1,0 +1,96 @@
+{% extends "kecupuapp_base/base_bootstrap3.html" %}
+
+{% block head-title %}
+{{ current_store.settings.site_title }}
+{% endblock %}
+{% block site-title %}
+{{ current_store.settings.site_title }}
+{% endblock %}
+
+{% block head-style %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css">
+{% endblock %}
+
+{% block navbar %}
+    <ul class="nav navbar-nav">
+        <li><a href="{% url jazzpos.views.index %}">Home</a></li>
+        <li><a href="{% url kecupuapp_base:profile %}">Profile</a></li>
+        <li><a href="{% url kecupuapp_base:logout %}?next={{ request.path }}">Logout</a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url kecupuapp_base:profile %}">{{ user.username }}</a></li>
+        {% if user.is_superuser %}
+        <li><a href="{% url admin:index %}">admin site</a></li>
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block sidebar %}
+{% block info-box %}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Info</h3>
+    </div>
+    <div class="panel-body">
+        <b>Store</b>:{{ current_store.name }} [<a href="{% url jazzpos-store-settings %}">Settings</a>]
+        {% if has_many_stores %}
+        <br />
+        Tukar &gt;
+        <ul>
+        {% for store in attached_stores %}
+            <li><a href="{% url jazzpos-store-switch store.id %}?redirect_to={{ request.path }}">{{ store.name }}</a></li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock info-box %}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Menu Utama</h3>
+    </div>
+    <div class="panel-body">
+        {% block main-nav %}
+        <li><a href="/">Utama</a></li>
+        <li><a href="{% url jazzpos.views.list_customers %}">Senarai Pelanggan</a></li>
+        <li><a href="{% url pos-reports %}">Laporan</a></li>
+        {% endblock %}
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Carian</h3>
+    </div>
+    <div class="panel-body">
+        <div class="search-form">
+            <form action="" method="get">
+            <input type="text" name="q" size="10" />
+            <input type="submit" name="submit" value="Carian" />
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Statistik</h3>
+    </div>
+    <div class="panel-body">
+        <div class="container">
+        Jumlah Pelanggan: {{ stats.total_customers }}<br />
+        {% for level in stats.patients_by_level %}
+        {% ifequal level.outer_level '0' %}Tiada level {% else %}
+        {{ level.outer_level|upper }} {% endifequal %}: {{ level.outer_level__count }}<br />
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock sidebar %}
+
+{% block footer %}
+    &copy; {{ current_store.settings.copyright }}
+{% endblock %}

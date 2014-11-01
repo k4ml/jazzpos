@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load pagination_tags %}
+
+{% block content %}
+<h1>Senarai Pelanggan</h1>
+<table class="datalist" width="100%">
+    <tr>
+        <th>ID</th>
+        <th>Nama</th>
+        <th>Alamat</th>
+        <th>Kategori</th>
+        <th></th>
+    </tr>
+    {% autopaginate customer_list 10 %}
+    {% for customer in customer_list %}
+    <tr>
+        <td>{{ customer.id }}</td>
+        <td width="30%"><a href="{% url jazzpos.views.view_customer customer.id %}">{{ customer.name }}</a></td>
+        <td width="50%">{{ customer.address }}</td>
+        <td>{{ customer.customer_type.description }}</td>
+        <td width="20%">
+            <a href="{% url pos-orders customer.id %}">Senarai Order</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5" align="center">Tiada</td>
+    </tr>
+    {% endfor %}
+</table>
+{% paginate %}
+{% endblock %}
+
+{% block main-nav %}
+{{ block.super }}
+<li><a href="{% url jazzpos.views.add_customer %}">Tambah pelanggan</a></li>
+{% endblock %}

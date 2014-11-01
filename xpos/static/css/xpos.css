@@ -1,0 +1,7 @@
+form input[type="text"] {
+    width: auto;
+}
+
+ul.messages {
+    padding-left: 20px;
+}
