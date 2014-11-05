@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, url
 
 import xpos.autocomplete_settings
 import xpos.views.main as views_main

@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, url
 from django.template import add_to_builtins
 
 add_to_builtins('kecupuapp_base.templatetags.base_filters')

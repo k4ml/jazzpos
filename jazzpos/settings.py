@@ -136,8 +136,6 @@ INSTALLED_APPS = (
     'kecupuapp_base',
     'django_extensions',
     #'staticfiles',
-    'autocomplete',
-    'guardian',
     'smartmin',
     'django_tablib',
     'widget_tweaks',
