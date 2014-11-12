@@ -1,6 +1,5 @@
 from django.http import HttpResponse, HttpResponseForbidden
 from django.core.urlresolvers import reverse
-from django.views.generic import list_detail
 from django.views.generic import create_update
 from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
@@ -17,6 +16,8 @@ from cari.forms import TextSearchForm
 from jazzpos.models import Customer, Store, Patient, Treatment, StoreSettings
 from jazzpos.forms import CustomerForm, PatientForm, TreatmentForm, StoreSettingsForm
 from xpos.views import main as xpos_views
+
+from gfbv import list_detail
 
 @has_role('staff')
 def index(request):

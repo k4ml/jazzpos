@@ -4,7 +4,6 @@ from decimal import Decimal
 import csv
 
 from django.http import HttpResponse
-from django.views.generic import list_detail, create_update
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -27,6 +26,8 @@ from xpos.utils import render_pdf
 from xpos.views.pdf import draw_receipt, draw_invoice
 
 from jazzpos.models import Customer, Store, StoreSettings
+
+from gfbv import list_detail
 
 @has_role('staff')
 def add_order(request, customer_id):
